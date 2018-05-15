@@ -2,8 +2,7 @@
 Simple OS built on rust, see https://os.phil-opp.com/
 
 ## Running
-1. `make iso`
-2. `qemu-system-x86_64 -cdrom build/os-x86_64.iso`
+1. `make run`
 
 ## Details
 ### Multiboot Kernel
