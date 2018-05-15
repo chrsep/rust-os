@@ -1,0 +1,7 @@
+.idea
+multiboot-header
+boot
+build
+isofiles
+*.iso
+*.o
