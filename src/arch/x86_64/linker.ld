@@ -1,3 +1,4 @@
+/* Defines the entry point, bootloader will jump here after loading the kernel*/
 ENTRY(start)
 
 SECTIONS {
