@@ -1,5 +1,6 @@
-; This is an X86 assembly file
-; .multiboot_header is used on the linker.ld for linking the binary
+; this is an X86 assembly file
+; section .multiboot_header is used on the linker.ld for linking the binary
+; and places the header on top of the file
 section .multiboot_header
 
 ; header_start and header_end is a label that marks a memory location (here 
