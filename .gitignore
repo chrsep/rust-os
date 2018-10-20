@@ -5,3 +5,5 @@ build
 isofiles
 *.iso
 *.o
+/target
+**/*.rs.bk
