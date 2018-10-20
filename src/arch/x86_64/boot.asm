@@ -11,7 +11,7 @@ start:
     ; make the stack pointer points to stack_top
     mov esp, stack_top
 
-    ; do all the checks
+    ; do all the checks by calling the functions
     call check_multiboot
     call check_cpuid
     call check_long_mode
@@ -86,10 +86,11 @@ check_cpuid:
     jmp error
 
 check_long_mode:
-    ; test if extended processor info in available
-    mov eax, 0x80000000    ; implicit argument for cpuid
+    ; CPUID works by taking argument from eax and loads information into the ecx and edx register
+    ; test if extended processor info in available(older cpu does not have it)
+    mov eax, 0x80000000    ; implicit argument for cpuid for requesting highest supported parameter value
     cpuid                  ; get highest supported argument
-    cmp eax, 0x80000001    ; it needs to be at least 0x80000001
+    cmp eax, 0x80000001    ; it needs to be at least 0x80000001 to support extended processor info
     jb .no_long_mode       ; if it's less, the CPU is too old for long mode
 
     ; use extended info to test if long mode is available
