@@ -4,15 +4,18 @@
 // basic rules, requirements, and modules that will allow the OS to be freestanding,
 // working and bootable.
 
+// when in test, allow unused imports
+#![cfg_attr(test, allow(unused_imports))]
 
 // Binary needs to be freestanding (runs without underlying OS),
 // stdlib have dependency to OS, so we disable it
-#![no_std]
+#![cfg_attr(not(test), no_std)]
+
 // Freestanding binary have no access to rust's runtime and crt0.
 // crt0 is the entry point for rust programs. no_main override the
 // entry point, so crt0 and rust's runtime doesn't get called.
 // "default entry point (crt0 -> rust runtime -> main)"
-#![no_main]
+#![cfg_attr(not(test), no_main)]
 
 use core::panic::PanicInfo;
 
@@ -22,6 +25,8 @@ static HELLO: &[u8] = b"Hello World";
 // Load Bootloader
 extern crate bootloader_precompiled;
 
+// Only compile when test flag not set
+#[cfg(not(test))]
 // _start is the default entry point for programs in linux, so
 // we make this function to serve as our program entry point.
 //
@@ -36,6 +41,8 @@ pub extern "C" fn _start() -> ! {
     loop {}
 }
 
+// Only compile when test flag not set
+#[cfg(not(test))]
 // Handles Panic
 // A diverging function, return type is never (`!`) aka never returns
 //
